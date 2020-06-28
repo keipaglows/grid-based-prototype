@@ -2,6 +2,9 @@ extends "pawn.gd"
 
 onready var Grid = get_parent()
 
+const grid_size = 32
+
+
 func _ready():
 	update_look_direction(Vector2(1, 0))
 
@@ -33,7 +36,17 @@ func move_to(target_position):
 	# Move the node to the target cell instantly,
 	# and animate the sprite moving from the start to the target cell
 	var move_direction = (target_position - position).normalized()
-	$Tween.interpolate_property($Pivot, "position", - move_direction * 32, Vector2(), $AnimationPlayer.current_animation_length, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	
+	$Tween.interpolate_property(
+		$Pivot,
+		"position",
+		- move_direction * grid_size,
+		Vector2(),
+		$AnimationPlayer.current_animation_length,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN
+	)
+	
 	position = target_position
 
 	$Tween.start()

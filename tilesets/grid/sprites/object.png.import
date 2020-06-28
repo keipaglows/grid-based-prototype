@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/grid_lines.png-beef853b47aa830c8383e5f6cc4d03ce.stex"
+path="res://.import/object.png-e34324fae9bf069b52352ba14a71d777.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tilesets/grid_lines/grid_lines.png"
-dest_files=[ "res://.import/grid_lines.png-beef853b47aa830c8383e5f6cc4d03ce.stex" ]
+source_file="res://tilesets/grid/sprites/object.png"
+dest_files=[ "res://.import/object.png-e34324fae9bf069b52352ba14a71d777.stex" ]
 
 [params]
 
