@@ -2,7 +2,7 @@ extends "pawn.gd"
 
 onready var Grid = get_parent()
 
-const half_grid = 8
+const half_grid_length = GameGlobals.TILE_SIZE / 2
 
 
 func _ready():
@@ -40,7 +40,7 @@ func move_to(target_position):
 	$Tween.interpolate_property(
 		$Pivot,
 		"position",
-		- move_direction * half_grid,
+		- move_direction * half_grid_length,
 		Vector2(),
 		$AnimationPlayer.current_animation_length,
 		Tween.TRANS_LINEAR,
