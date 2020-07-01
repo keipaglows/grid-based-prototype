@@ -1,5 +1,5 @@
-extends "pawn.gd"
-
+extends "base_entity.gd"
+export(bool) var rotation_enabled = true
 onready var Grid = get_parent()
 
 const half_grid_length = GameGlobals.TILE_SIZE / 2
@@ -12,7 +12,9 @@ func _process(delta):
 	var input_direction = get_input_direction()
 	if not input_direction:
 		return
-	update_look_direction(input_direction)
+		
+	if rotation_enabled:
+		update_look_direction(input_direction)
 
 	var target_position = Grid.request_move(self, input_direction)
 	if target_position:
