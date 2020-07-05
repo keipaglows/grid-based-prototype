@@ -5,8 +5,8 @@
 [ext_resource path="res://grid/grid.gd" type="Script" id=3]
 [ext_resource path="res://entities/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://entities/base_entity.gd" type="Script" id=5]
-[ext_resource path="res://entities/sprites/character_grey.png" type="Texture" id=6]
-[ext_resource path="res://entities/sprites/pickup.png" type="Texture" id=7]
+[ext_resource path="res://entities/sprites/actors/mouse.png" type="Texture" id=6]
+[ext_resource path="res://entities/sprites/objects/coins.png" type="Texture" id=7]
 
 [node name="Game" type="Node"]
 

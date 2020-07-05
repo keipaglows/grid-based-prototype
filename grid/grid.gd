@@ -6,7 +6,7 @@ enum { EMPTY = -1, ACTOR, OBJECT, OBSTACLE }
 
 func _ready():
 	if hide_base_tiles:
-		self._set_tile_invisible(OBSTACLE)
+		self.hide_base_tiles()
 	
 	var ObstacleScene = load("res://entities/Obstacle.tscn")
 
@@ -46,6 +46,11 @@ func update_pawn_position(pawn, cell_start, cell_target):
 	set_cellv(cell_target, pawn.type)
 	set_cellv(cell_start, EMPTY)
 	return map_to_world(cell_target) + cell_size / 2
+
+func hide_base_tiles():
+	self._set_tile_invisible(ACTOR)
+	self._set_tile_invisible(OBJECT)
+	self._set_tile_invisible(OBSTACLE)
 
 func _set_tile_invisible(tile_id):
 	# reduciing tile_set region/size to possible minimum rectangle
