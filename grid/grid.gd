@@ -1,11 +1,26 @@
 extends TileMap
+export(bool) var hide_base_tiles = true
 
-enum { EMPTY = -1, ACTOR, OBJECT, OBSTACLE}
+enum { EMPTY = -1, ACTOR, OBJECT, OBSTACLE }
+
 
 func _ready():
+	if hide_base_tiles:
+		self._set_tile_invisible(OBSTACLE)
+	
+	var ObstacleScene = load("res://entities/Obstacle.tscn")
+
 	for child in get_children():
 		set_cellv(world_to_map(child.position), child.type)
+	
+	for cell_coordinates in get_used_cells_by_id(OBSTACLE):
+#		print(cell_coordinates)
+		var obstacle = ObstacleScene.instance()
+		obstacle.position = map_to_world(cell_coordinates) + cell_size / 2
+
+		add_child(obstacle)
 		
+
 func get_cell_pawn(coordinates):
 	for node in get_children():
 		if world_to_map(node.position) == coordinates:
@@ -31,3 +46,7 @@ func update_pawn_position(pawn, cell_start, cell_target):
 	set_cellv(cell_target, pawn.type)
 	set_cellv(cell_start, EMPTY)
 	return map_to_world(cell_target) + cell_size / 2
+
+func _set_tile_invisible(tile_id):
+	# reduciing tile_set region/size to possible minimum rectangle
+	tile_set.tile_set_region(tile_id, Rect2(Vector2(), Vector2(0, 1)))
