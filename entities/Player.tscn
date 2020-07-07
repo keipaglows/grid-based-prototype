@@ -3,7 +3,6 @@
 [ext_resource path="res://entities/player.gd" type="Script" id=1]
 [ext_resource path="res://entities/sprites/actors/player.png" type="Texture" id=2]
 
-
 [sub_resource type="Animation" id=1]
 resource_name = "bump"
 length = 0.1
@@ -59,7 +58,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.05, 0.15, 0.25 ),
 "transitions": PoolRealArray( 1, 0.354553, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.20007, 0.917384 ), Vector2( 0.916712, 1.13495 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1.1, 0.917 ), Vector2( 0.916712, 1.13495 ), Vector2( 1, 1 ) ]
 }
 
 [node name="Player" type="Node2D"]

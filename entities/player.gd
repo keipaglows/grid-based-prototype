@@ -1,8 +1,7 @@
 extends "base_entity.gd"
 export(bool) var rotation_enabled = true
-onready var Grid = get_parent()
 
-const half_grid_length = GameGlobals.TILE_SIZE / 2
+onready var Grid = get_parent()
 
 
 func _ready():
@@ -10,6 +9,7 @@ func _ready():
 
 func _process(delta):
 	var input_direction = get_input_direction()
+
 	if not input_direction:
 		return
 		
@@ -35,26 +35,29 @@ func move_to(target_position):
 	set_process(false)
 	$AnimationPlayer.play("walk")
 
-	# Move the node to the target cell instantly,
-	# and animate the sprite moving from the start to the target cell
+	# Animate the pivot with the sprite moving to the intended cell
 	var move_direction = (target_position - position).normalized()
 	
 	$Tween.interpolate_property(
 		$Pivot,
 		"position",
-		- move_direction * half_grid_length,
 		Vector2(),
+		move_direction * GameGlobals.TILE_SIZE,
 		$AnimationPlayer.current_animation_length,
 		Tween.TRANS_LINEAR,
 		Tween.EASE_IN
 	)
-	
-	position = target_position
 
 	$Tween.start()
-
-	# Stop the function execution until the animation finished
-	yield($AnimationPlayer, "animation_finished")
+	
+	# Stop the function execution until the tween interpolatio nis finished
+	yield($Tween, "tween_completed")
+	
+	# Set both actual position of node to cell where "pivot now is"
+	# and at the same time setting pivot position bact to the origin,
+	# where it's parent node now is (where pivot was before)
+	position = target_position
+	$Pivot.position = Vector2()
 	
 	set_process(true)
 
