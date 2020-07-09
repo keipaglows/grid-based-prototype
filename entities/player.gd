@@ -37,12 +37,17 @@ func move_to(target_position):
 
 	# Animate the pivot with the sprite moving to the intended cell
 	var move_direction = (target_position - position).normalized()
+	var move_length = GameGlobals.TILE_SIZE
+
+	# setting move_length 1.5 longer if we move diagnolly
+	if abs(move_direction[0]) == abs(move_direction[1]):
+		move_length = GameGlobals.TILE_SIZE * 1.5
 	
 	$Tween.interpolate_property(
 		$Pivot,
 		"position",
 		Vector2(),
-		move_direction * GameGlobals.TILE_SIZE,
+		move_direction * move_length,
 		$AnimationPlayer.current_animation_length,
 		Tween.TRANS_LINEAR,
 		Tween.EASE_IN
