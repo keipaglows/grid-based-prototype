@@ -14,7 +14,6 @@ func _ready():
 		set_cellv(world_to_map(child.position), child.type)
 	
 	for cell_coordinates in get_used_cells_by_id(OBSTACLE):
-#		print(cell_coordinates)
 		var obstacle = ObstacleScene.instance()
 		obstacle.position = map_to_world(cell_coordinates) + cell_size / 2
 
