@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://grid/grid_lines_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://grid/grid_tileset.tres" type="TileSet" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://entities/sprites/actors/mouse.png" type="Texture" id=6]
 [ext_resource path="res://entities/sprites/objects/coins.png" type="Texture" id=7]
 [ext_resource path="res://grid/grid_lines.gd" type="Script" id=8]
+[ext_resource path="res://grid/obstacles.gd" type="Script" id=9]
 
 [node name="Game" type="Node"]
 
@@ -22,6 +23,13 @@ cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 format = 1
 script = ExtResource( 8 )
 render_grid_lines = true
+
+[node name="Obstacles" type="TileMap" parent="."]
+cell_size = Vector2( 16, 16 )
+cell_quadrant_size = 4
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+script = ExtResource( 9 )
 
 [node name="Grid" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
