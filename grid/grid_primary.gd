@@ -1,5 +1,5 @@
 extends TileMap
-export(bool) var hide_base_tiles = true
+export (bool) var hide_base_tiles = true
 
 enum { EMPTY = -1, ACTOR, OBJECT, OBSTACLE }
 

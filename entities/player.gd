@@ -3,6 +3,8 @@ export(bool) var rotation_enabled = true
 
 onready var Grid = get_parent()
 
+var ObstacleClass = load("res://entities/classes/obstacle.gd")
+
 
 func _ready():
 	update_look_direction(Vector2(1, 0))
@@ -36,6 +38,8 @@ func update_look_direction(direction):
 
 
 func move_to(target_position):
+#	var obstacle = ObstacleClass.new('ffs')
+#	print(obstacle.type)
 	set_process(false)
 	$AnimationPlayer.play("walk")
 

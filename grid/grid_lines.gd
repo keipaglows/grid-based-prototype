@@ -1,5 +1,5 @@
 extends TileMap
-export(bool) var render_grid_lines = false
+export (bool) var render_grid_lines = false
 
 enum { EMPTY = -1, GRID_LINE }
 
