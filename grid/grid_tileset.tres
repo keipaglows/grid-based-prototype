@@ -4,10 +4,6 @@
 [ext_resource path="res://grid/static/base/obstacle.png" type="Texture" id=2]
 [ext_resource path="res://grid/static/base/object.png" type="Texture" id=3]
 
-
-
-
-
 [resource]
 0/name = "actor.png 0"
 0/texture = ExtResource( 1 )
