@@ -1,15 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://grid/grid_lines_tileset.tres" type="TileSet" id=1]
-[ext_resource path="res://grid/grid_primary_tileset.tres" type="TileSet" id=2]
-[ext_resource path="res://grid/grid_primary.gd" type="Script" id=3]
+[ext_resource path="res://grid/grid_tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://grid/grid.gd" type="Script" id=3]
 [ext_resource path="res://entities/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://grid/grid_lines.gd" type="Script" id=8]
-[ext_resource path="res://grid/grid_secondary.gd" type="Script" id=9]
 
 [node name="Game" type="Node"]
 
-[node name="GridPrimary" type="TileMap" parent="."]
+[node name="Grid" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 16, 16 )
 cell_quadrant_size = 4
@@ -17,16 +16,9 @@ cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 format = 1
 script = ExtResource( 3 )
 
-[node name="Player" parent="GridPrimary" instance=ExtResource( 4 )]
+[node name="Player" parent="Grid" instance=ExtResource( 4 )]
 position = Vector2( 72, 88 )
 rotation_enabled = false
-
-[node name="GridSecondary" type="TileMap" parent="."]
-cell_size = Vector2( 16, 16 )
-cell_quadrant_size = 4
-cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-format = 1
-script = ExtResource( 9 )
 
 [node name="GridLines" type="TileMap" parent="."]
 modulate = Color( 1, 1, 1, 0.271059 )
