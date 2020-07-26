@@ -13,7 +13,7 @@ func _process(delta):
 
 	if not input_direction:
 		return
-		
+
 	if rotation_enabled:
 		update_look_direction(input_direction)
 
@@ -47,7 +47,7 @@ func move_to(target_position):
 	# setting move_length 1.5 longer if we move diagnolly
 	if abs(move_direction[0]) == abs(move_direction[1]):
 		move_length = GameGlobals.TILE_SIZE * 1.5
-	
+
 	$Tween.interpolate_property(
 		$Pivot,
 		"position",
@@ -62,13 +62,13 @@ func move_to(target_position):
 	
 	# Stop the function execution until the tween interpolatio nis finished
 	yield($Tween, "tween_completed")
-	
+
 	# Set both actual position of node to cell where "pivot now is"
 	# and at the same time setting pivot position bact to the origin,
 	# where it's parent node now is (where pivot was before)
 	position = target_position
 	$Pivot.position = Vector2()
-	
+
 	set_process(true)
 
 
