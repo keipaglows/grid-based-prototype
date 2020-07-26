@@ -1,6 +1,8 @@
 [gd_resource type="TileSet" load_steps=2 format=2]
 
-[ext_resource path="res://grid/static/base/grid_lines.png" type="Texture" id=1]
+[ext_resource path="res://grid/sprites/grid_lines.png" type="Texture" id=1]
+
+
 
 
 

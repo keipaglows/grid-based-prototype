@@ -1,4 +1,4 @@
-extends "base_entity.gd"
+extends "base_pawn.gd"
 export(bool) var rotation_enabled = true
 
 onready var Grid = get_parent()

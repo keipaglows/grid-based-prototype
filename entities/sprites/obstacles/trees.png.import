@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/actor.png-541bd636bac77ef39c01229da5764996.stex"
+path="res://.import/trees.png-555925be3579a730c82711a75b6f4586.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://grid/static/base/actor.png"
-dest_files=[ "res://.import/actor.png-541bd636bac77ef39c01229da5764996.stex" ]
+source_file="res://entities/sprites/obstacles/trees.png"
+dest_files=[ "res://.import/trees.png-555925be3579a730c82711a75b6f4586.stex" ]
 
 [params]
 

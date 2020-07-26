@@ -3,7 +3,7 @@ extends Node
 
 class_name BaseEntity
 
-var type: String = "base"
+var type: int = EntityType.BASE
 var has_collision: bool = false
 
 var position: Vector2

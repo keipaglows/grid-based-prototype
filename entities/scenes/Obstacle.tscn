@@ -1,6 +1,9 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://grid/static/tilesets/trees_ts.png" type="Texture" id=1]
+[ext_resource path="res://entities/sprites/obstacles/trees.png" type="Texture" id=1]
+
+
+
 
 [node name="Obstacle" type="Position2D"]
 position = Vector2( 8, 8 )

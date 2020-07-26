@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/grid_lines.png-1bf7e46738f6781cfe99d675a0b50819.stex"
+path="res://.import/player.png-897937b1038f3f229e9b5060ae700ee0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://grid/static/base/grid_lines.png"
-dest_files=[ "res://.import/grid_lines.png-1bf7e46738f6781cfe99d675a0b50819.stex" ]
+source_file="res://entities/sprites/player.png"
+dest_files=[ "res://.import/player.png-897937b1038f3f229e9b5060ae700ee0.stex" ]
 
 [params]
 
