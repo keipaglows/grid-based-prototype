@@ -3,6 +3,9 @@ export(bool) var rotation_enabled = true
 
 onready var Grid = get_parent()
 
+const DEFAULT_CAMERA_SMOOTHING = 2
+const DIAGONAL_CAMERA_SMOOTHING = 4
+
 
 func _ready():
 	update_look_direction(Vector2(1, 0))
@@ -11,18 +14,15 @@ func _ready():
 func _process(delta):
 	var input_direction = get_input_direction()
 
-	if not input_direction:
-		return
-
-	if rotation_enabled:
+	if input_direction:
 		update_look_direction(input_direction)
 
-	var target_position = Grid.request_move(self, input_direction)
+		var target_position = Grid.request_move(self, input_direction)
 
-	if target_position:
-		move_to(target_position)
-	else:
-		bump()
+		if target_position:
+			move_to(target_position)
+		else:
+			bump()
 
 
 func get_input_direction():
@@ -33,7 +33,14 @@ func get_input_direction():
 
 
 func update_look_direction(direction):
-	$Pivot/Sprite.rotation = direction.angle()
+	update_camera_position(direction)
+
+	if rotation_enabled:
+		$Pivot/Sprite.rotation = direction.angle()
+
+
+func update_camera_position(direction):
+	$Pivot/CameraWrapper.rotation = direction.angle()
 
 
 func move_to(target_position):
@@ -44,9 +51,10 @@ func move_to(target_position):
 	var move_direction = (target_position - position).normalized()
 	var move_length = GameGlobals.TILE_SIZE
 
-	# setting move_length 1.5 longer if we move diagnolly
+	# diagonal movement fixes
 	if abs(move_direction[0]) == abs(move_direction[1]):
 		move_length = GameGlobals.TILE_SIZE * 1.5
+		$Pivot/CameraWrapper/Offset/Camera.smoothing_speed = DIAGONAL_CAMERA_SMOOTHING
 
 	$Tween.interpolate_property(
 		$Pivot,
@@ -59,7 +67,6 @@ func move_to(target_position):
 	)
 
 	$Tween.start()
-	
 	# Stop the function execution until the tween interpolatio nis finished
 	yield($Tween, "tween_completed")
 
@@ -68,6 +75,9 @@ func move_to(target_position):
 	# where it's parent node now is (where pivot was before)
 	position = target_position
 	$Pivot.position = Vector2()
+
+	if $Pivot/CameraWrapper/Offset/Camera.smoothing_speed != DEFAULT_CAMERA_SMOOTHING:
+		$Pivot/CameraWrapper/Offset/Camera.smoothing_speed = DEFAULT_CAMERA_SMOOTHING
 
 	set_process(true)
 
