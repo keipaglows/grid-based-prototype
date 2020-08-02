@@ -11,18 +11,14 @@ func _ready():
 func _process(delta):
 	var input_direction = get_input_direction()
 
-	if not input_direction:
-		return
+	if input_direction:
+		var target_position = Grid.request_move(self, input_direction)
 
-	if rotation_enabled:
-		update_look_direction(input_direction)
-
-	var target_position = Grid.request_move(self, input_direction)
-
-	if target_position:
-		move_to(target_position)
-	else:
-		bump()
+		if target_position:
+			move_to(target_position)
+			update_look_direction(input_direction)
+		else:
+			bump()
 
 
 func get_input_direction():
@@ -33,7 +29,14 @@ func get_input_direction():
 
 
 func update_look_direction(direction):
-	$Pivot/Sprite.rotation = direction.angle()
+	update_camera_position(direction)
+
+	if rotation_enabled:
+		$Pivot/Sprite.rotation = direction.angle()
+
+
+func update_camera_position(direction):
+	$Pivot/CameraWrapper.rotation = direction.angle()
 
 
 func move_to(target_position):
@@ -59,7 +62,6 @@ func move_to(target_position):
 	)
 
 	$Tween.start()
-	
 	# Stop the function execution until the tween interpolatio nis finished
 	yield($Tween, "tween_completed")
 
