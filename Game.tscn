@@ -17,7 +17,7 @@ format = 1
 script = ExtResource( 3 )
 
 [node name="Player" parent="Grid" instance=ExtResource( 4 )]
-position = Vector2( 72, 88 )
+position = Vector2( 88, 88 )
 rotation_enabled = false
 
 [node name="GridLines" type="TileMap" parent="."]

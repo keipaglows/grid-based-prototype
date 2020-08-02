@@ -3,9 +3,6 @@ export(bool) var rotation_enabled = true
 
 onready var Grid = get_parent()
 
-const DEFAULT_CAMERA_SMOOTHING = 2
-const DIAGONAL_CAMERA_SMOOTHING = 4
-
 
 func _ready():
 	update_look_direction(Vector2(1, 0))
@@ -15,12 +12,11 @@ func _process(delta):
 	var input_direction = get_input_direction()
 
 	if input_direction:
-		update_look_direction(input_direction)
-
 		var target_position = Grid.request_move(self, input_direction)
 
 		if target_position:
 			move_to(target_position)
+			update_look_direction(input_direction)
 		else:
 			bump()
 
@@ -51,10 +47,9 @@ func move_to(target_position):
 	var move_direction = (target_position - position).normalized()
 	var move_length = GameGlobals.TILE_SIZE
 
-	# diagonal movement fixes
+	# setting move_length 1.5 longer if we move diagnolly
 	if abs(move_direction[0]) == abs(move_direction[1]):
 		move_length = GameGlobals.TILE_SIZE * 1.5
-		$Pivot/CameraWrapper/Offset/Camera.smoothing_speed = DIAGONAL_CAMERA_SMOOTHING
 
 	$Tween.interpolate_property(
 		$Pivot,
@@ -75,9 +70,6 @@ func move_to(target_position):
 	# where it's parent node now is (where pivot was before)
 	position = target_position
 	$Pivot.position = Vector2()
-
-	if $Pivot/CameraWrapper/Offset/Camera.smoothing_speed != DEFAULT_CAMERA_SMOOTHING:
-		$Pivot/CameraWrapper/Offset/Camera.smoothing_speed = DEFAULT_CAMERA_SMOOTHING
 
 	set_process(true)
 
