@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://grid/grid_lines_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://grid/grid_tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://grid/grid.gd" type="Script" id=3]
 [ext_resource path="res://entities/scenes/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://map_generator/scenes/MapGenerator.tscn" type="PackedScene" id=5]
 [ext_resource path="res://grid/grid_lines.gd" type="Script" id=8]
 
 [node name="Game" type="Node"]
@@ -31,3 +32,7 @@ cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 format = 1
 script = ExtResource( 8 )
 RENDER_GRID_LINES = true
+
+[node name="GUI Layer" type="CanvasLayer" parent="."]
+
+[node name="MapGenerator" parent="GUI Layer" instance=ExtResource( 5 )]

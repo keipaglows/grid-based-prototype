@@ -24,5 +24,5 @@ func destroy(tile_map: TileMap):
 
 
 func add_to_tile_map(tile_map: TileMap):
-	self.scene.position = tile_map.map_to_world(self.position) + GameGlobals.CELL_SIZE / 2
+	self.scene.position = tile_map.map_to_world(self.position) + GameGlobals.TILE_SIZE / 2
 	tile_map.add_child(self.scene)
