@@ -9,6 +9,10 @@
 
 [node name="Game" type="Node"]
 
+[node name="GUI Layer" type="CanvasLayer" parent="."]
+
+[node name="MapGenerator" parent="GUI Layer" instance=ExtResource( 5 )]
+
 [node name="Grid" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 16, 16 )
@@ -32,7 +36,3 @@ cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 format = 1
 script = ExtResource( 8 )
 RENDER_GRID_LINES = true
-
-[node name="GUI Layer" type="CanvasLayer" parent="."]
-
-[node name="MapGenerator" parent="GUI Layer" instance=ExtResource( 5 )]

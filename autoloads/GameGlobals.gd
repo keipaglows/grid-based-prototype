@@ -3,6 +3,9 @@ extends Node
 
 const TILE_WIDTH = 16
 const TILE_SIZE = Vector2(TILE_WIDTH, TILE_WIDTH)
+
+const GAME_MAP_SECTIONS_WIDTH = 8
+const GAME_MAP_SECTIONS_HEIGHT = 5
 const SECTION_SIZE = 3
 
 var GAME_MAP_SECTIONS = {}

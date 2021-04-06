@@ -5,8 +5,8 @@ export (Texture) var texture setget _set_texture
 var tile_sections
 var mini_map_texture
 
-const GAME_MAP_SECTIONS_WIDTH = 5
-const GAME_MAP_SECTIONS_HEIGHT = 3
+const GAME_MAP_SECTIONS_WIDTH = GameGlobals.GAME_MAP_SECTIONS_WIDTH
+const GAME_MAP_SECTIONS_HEIGHT = GameGlobals.GAME_MAP_SECTIONS_HEIGHT
 const SECTION_SIZE = GameGlobals.SECTION_SIZE
 
 var RNG = RandomNumberGenerator.new()
@@ -50,6 +50,12 @@ func _ready():
 							   Vector2(X * SECTION_SIZE, Y * SECTION_SIZE))
 			GameGlobals.GAME_MAP_SECTIONS[Vector2(X, Y)] = section
 
+	# scailing up resulted mini_map to better see it on screen
+	mini_map.resize(
+		GAME_MAP_SECTIONS_WIDTH * SECTION_SIZE * 2,
+		GAME_MAP_SECTIONS_HEIGHT * SECTION_SIZE * 2,
+		0
+	)
 	# creating from image without any default flags
 	mini_map_texture.create_from_image(mini_map, 0)
 	texture = mini_map_texture
@@ -59,12 +65,9 @@ func get_section(tile_sections: Image, x: int, y: int):
 	var start_x = x * SECTION_SIZE
 	var start_y = y * SECTION_SIZE
 
-	var section = tile_sections.get_rect(
+	return tile_sections.get_rect(
 		Rect2(start_x, start_y, SECTION_SIZE, SECTION_SIZE)
 	)
-#	section.resize(9, 9, Image.INTERPOLATE_NEAREST)
-
-	return section
 
 
 func get_side_colors(section: Image, side):
