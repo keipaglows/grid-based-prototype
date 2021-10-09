@@ -36,3 +36,4 @@ cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 format = 1
 script = ExtResource( 8 )
 RENDER_GRID_LINES = true
+HIGHLIGHT_SECTION_LINES = true

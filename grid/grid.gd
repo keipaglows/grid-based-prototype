@@ -4,7 +4,7 @@ export (int) var WIDTH = 20
 export (int) var HEIGTH = 12
 
 
-enum { EMPTY = -1, ACTOR, OBJECT, OBSTACLE }
+enum {EMPTY = -1, ACTOR, OBJECT, OBSTACLE}
 
 const MANUAL_GENERATION = false
 

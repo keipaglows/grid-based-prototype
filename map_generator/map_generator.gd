@@ -10,16 +10,10 @@ const GAME_MAP_SECTIONS_HEIGHT = GameGlobals.GAME_MAP_SECTIONS_HEIGHT
 const SECTION_SIZE = GameGlobals.SECTION_SIZE
 
 var RNG = RandomNumberGenerator.new()
+var ALLOWED_SECTION_SET = {
+	0: null
+}
 
-#const TOP_SIDE = 0
-#const RIGHT_SIDE = 1
-#const BOTTOM_SIDE = 2
-#const LEFT_SIDE = 3
-
-
-#class SectionSide:
-#
-#	func _init()
 
 func _ready():
 	mini_map_texture = ImageTexture.new()
@@ -27,6 +21,7 @@ func _ready():
 
 	RNG.randomize()
 	tile_sections.load("map_generator/sprites/forest.png")
+	var whole_set = self.get_whole_section_set(tile_sections)
 
 	var mini_map = Image.new()
 	var MAX_SECTION_X = (tile_sections.get_width() / 3) - 1
@@ -40,15 +35,24 @@ func _ready():
 	# Filling GAME_MAP_SECTIONS with sections
 	for X in GAME_MAP_SECTIONS_WIDTH:
 		for Y in GAME_MAP_SECTIONS_HEIGHT:
+			GameGlobals.GAME_MAP_ALLOWED_SECTIONS[Vector2(X, Y)] = whole_set
+			
 			var section_x = RNG.randi_range(0, MAX_SECTION_X)
 			var section_y = RNG.randi_range(0, MAX_SECTION_Y)
 			var section = get_section(tile_sections, section_x, section_y)
+			GameGlobals.GAME_MAP_SECTIONS[Vector2(X, Y)] = section
+
+			###
+			var has_top_match = section.has_match(whole_set[3], ImageSection.WITH_RIGHT_SIDE)
+			
+			if has_top_match:
+				print('X: %s, Y: %s, HAS_TOP_MATCH: %s' % [X, Y, has_top_match])
+			###
 
 			# drawing current section to mini_map
 			mini_map.blit_rect(section,
 							   Rect2(0, 0, SECTION_SIZE, SECTION_SIZE),
 							   Vector2(X * SECTION_SIZE, Y * SECTION_SIZE))
-			GameGlobals.GAME_MAP_SECTIONS[Vector2(X, Y)] = section
 
 	# scailing up resulted mini_map to better see it on screen
 	mini_map.resize(
@@ -64,14 +68,29 @@ func _ready():
 func get_section(tile_sections: Image, x: int, y: int):
 	var start_x = x * SECTION_SIZE
 	var start_y = y * SECTION_SIZE
-
-	return tile_sections.get_rect(
+#	return tile_sections.get_rect(
+#		Rect2(start_x, start_y, SECTION_SIZE, SECTION_SIZE)
+#	)
+	var section = tile_sections.get_rect(
 		Rect2(start_x, start_y, SECTION_SIZE, SECTION_SIZE)
 	)
+	
+	return ImageSection.new(section)
+	
 
 
-func get_side_colors(section: Image, side):
-	pass
+func get_whole_section_set(tile_sections: Image):
+	var whole_set = []
+
+	for X in GAME_MAP_SECTIONS_WIDTH:
+		for Y in GAME_MAP_SECTIONS_HEIGHT:
+			var section = tile_sections.get_rect(
+				Rect2(X * SECTION_SIZE, Y * SECTION_SIZE, SECTION_SIZE, SECTION_SIZE)
+			)
+			
+			whole_set.append(ImageSection.new(section))
+	
+	return whole_set
 
 
 func get_image_colors(image: Image):
