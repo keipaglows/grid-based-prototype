@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "ImageSection",
 "language": "GDScript",
 "path": "res://entities/classes/image_section.gd"
+}, {
+"base": "Node2D",
+"class": "ZLabel",
+"language": "GDScript",
+"path": "res://entities/classes/z_label.gd"
 } ]
 _global_script_class_icons={
 "BaseEntity": "",
 "EntityType": "",
-"ImageSection": ""
+"ImageSection": "",
+"ZLabel": ""
 }
 
 [application]
@@ -49,6 +55,10 @@ window/size/test_width=1280
 window/size/test_height=720
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
+
+[gui]
+
+theme/custom_font="res://fonts/font_m3x6.tres"
 
 [input]
 

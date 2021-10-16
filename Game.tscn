@@ -23,9 +23,10 @@ script = ExtResource( 3 )
 
 [node name="Player" parent="Grid" instance=ExtResource( 4 )]
 position = Vector2( 88, 88 )
+z_index = 300
 rotation_enabled = false
 
-[node name="GridLines" type="TileMap" parent="."]
+[node name="GridLines" type="TileMap" parent="Grid"]
 modulate = Color( 1, 1, 1, 0.271059 )
 z_index = -1
 z_as_relative = false
@@ -37,3 +38,4 @@ format = 1
 script = ExtResource( 8 )
 RENDER_GRID_LINES = true
 HIGHLIGHT_SECTION_LINES = true
+RENDER_SECTION_COORDINATES = true

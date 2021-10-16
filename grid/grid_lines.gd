@@ -1,6 +1,7 @@
 extends TileMap
 export (bool) var RENDER_GRID_LINES = false
 export (bool) var HIGHLIGHT_SECTION_LINES = false
+export (bool) var RENDER_SECTION_COORDINATES = false
 
 
 enum {EMPTY = -1, GRID_LINE, GRID_LINE_SECTION_X, GRID_LINE_SECTION_Y, GRID_LINE_SECTION_XY}
@@ -19,13 +20,22 @@ func _ready():
 				# TODO: add an option to render section coordinate
 				# if RENDER_SECTION_COORDINATES: ...
 				if HIGHLIGHT_SECTION_LINES:
-					if (Y % 3 == 0):
+					if (Y % SECTION_SIZE == 0):
 						grid_cell = GRID_LINE_SECTION_X
 
-					if (X % 3 == 0):
+					if (X % SECTION_SIZE == 0):
 						grid_cell = GRID_LINE_SECTION_Y
 
-					if (X % 3 == 0) and (Y % 3 == 0):
+					if (X % SECTION_SIZE == 0) and (Y % SECTION_SIZE == 0):
 						grid_cell = GRID_LINE_SECTION_XY
+
+						if RENDER_SECTION_COORDINATES:							
+							var coordinates_label = ZLabel.new(
+								'%s, %s' % [X / 3, Y / 3],
+								GameGlobals.TILE_WIDTH * X + 2,
+								GameGlobals.TILE_WIDTH * Y
+							)
+							
+							coordinates_label.add_to_scene(self)
 
 				set_cell(X, Y, grid_cell)
