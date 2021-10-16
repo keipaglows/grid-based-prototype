@@ -9,16 +9,16 @@ var LEFT_SIDE: Image
 var RIGHT_SIDE: Image
 
 # consts to match two sections
-const WITH_TOP_SIDE = 'TOP_SIDE'
-const WITH_BOTTOM_SIDE = 'BOTTOM_SIDE'
-const WITH_LEFT_SIDE = 'LEFT_SIDE'
-const WITH_RIGHT_SIDE = 'RIGHT_SIDE'
+const AT_TOP_SIDE = 'TOP_SIDE'
+const AT_BOTTOM_SIDE = 'BOTTOM_SIDE'
+const AT_LEFT_SIDE = 'LEFT_SIDE'
+const AT_RIGHT_SIDE = 'RIGHT_SIDE'
 
 var MATCH_SIDE_MAP = {
-	WITH_TOP_SIDE: 'BOTTOM_SIDE',
-	WITH_BOTTOM_SIDE: 'TOP_SIDE',
-	WITH_LEFT_SIDE: 'RIGHT_SIDE',
-	WITH_RIGHT_SIDE: 'LEFT_SIDE'
+	AT_TOP_SIDE: 'BOTTOM_SIDE',
+	AT_BOTTOM_SIDE: 'TOP_SIDE',
+	AT_LEFT_SIDE: 'RIGHT_SIDE',
+	AT_RIGHT_SIDE: 'LEFT_SIDE'
 }
 
 
@@ -36,9 +36,9 @@ func _init(section: Image).():
 	self.LEFT_SIDE = self.get_rect(Rect2(0, 0, 1, 3))
 	self.RIGHT_SIDE = self.get_rect(Rect2(2, 0, 1, 3))
 
-
-# TODO: store `get_data` value in `*_SIDE` attributes?
+# returns `true` if `matching_side` of `ImageSection` is a match to opposing side of `match_section` 
 func has_match(match_section: ImageSection, matching_side: String):
 	var match_section_side = match_section.get(MATCH_SIDE_MAP[matching_side])
 
+	# TODO: store `get_data` value in `*_SIDE` attributes?
 	return self.get(matching_side).get_data() == match_section_side.get_data()

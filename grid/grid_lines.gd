@@ -33,7 +33,7 @@ func _ready():
 							var coordinates_label = ZLabel.new(
 								'%s, %s' % [X / 3, Y / 3],
 								GameGlobals.TILE_WIDTH * X + 2,
-								GameGlobals.TILE_WIDTH * Y
+								GameGlobals.TILE_WIDTH * Y - 1
 							)
 							
 							coordinates_label.add_to_scene(self)

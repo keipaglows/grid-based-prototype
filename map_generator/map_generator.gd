@@ -81,9 +81,9 @@ func get_section(tile_sections: Image, x: int, y: int):
 
 func get_whole_section_set(tile_sections: Image):
 	var whole_set = []
-
-	for X in GAME_MAP_SECTIONS_WIDTH:
-		for Y in GAME_MAP_SECTIONS_HEIGHT:
+	# dimensions in sections of `forest.png`
+	for X in 3:
+		for Y in 4:
 			var section = tile_sections.get_rect(
 				Rect2(X * SECTION_SIZE, Y * SECTION_SIZE, SECTION_SIZE, SECTION_SIZE)
 			)
