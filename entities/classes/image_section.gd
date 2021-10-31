@@ -8,6 +8,8 @@ var BOTTOM_SIDE: Image
 var LEFT_SIDE: Image
 var RIGHT_SIDE: Image
 
+var section_index: int
+
 # consts to match two sections
 const AT_TOP_SIDE = 'TOP_SIDE'
 const AT_BOTTOM_SIDE = 'BOTTOM_SIDE'
@@ -22,7 +24,7 @@ var MATCH_SIDE_MAP = {
 }
 
 
-func _init(section: Image).():
+func _init(section: Image, section_index: int = 0).():
 	self.create_from_data(
 		GameGlobals.SECTION_SIZE,
 		GameGlobals.SECTION_SIZE,
@@ -35,6 +37,8 @@ func _init(section: Image).():
 	self.BOTTOM_SIDE = self.get_rect(Rect2(0, 2, 3, 1))
 	self.LEFT_SIDE = self.get_rect(Rect2(0, 0, 1, 3))
 	self.RIGHT_SIDE = self.get_rect(Rect2(2, 0, 1, 3))
+
+	self.section_index = section_index
 
 # returns `true` if `matching_side` of `ImageSection` is a match to opposing side of `match_section` 
 func has_match(match_section: ImageSection, matching_side: String):

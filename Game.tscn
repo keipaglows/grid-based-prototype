@@ -12,6 +12,7 @@
 [node name="GUI Layer" type="CanvasLayer" parent="."]
 
 [node name="MapGenerator" parent="GUI Layer" instance=ExtResource( 5 )]
+TRAVERSE_ALGORITHM = 1
 
 [node name="Grid" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )

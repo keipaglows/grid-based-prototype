@@ -39,12 +39,13 @@ func _ready():
 		# Populating grid from section data
 		for x in GAME_MAP_SECTIONS_WIDTH:
 			for y in GAME_MAP_SECTIONS_HEIGHT:
-				var section = GameGlobals.GAME_MAP_SECTIONS[Vector2(x, y)]
+				var section = GameGlobals.GAME_MAP_SECTIONS.get(Vector2(x, y))
 
-				section.lock()
-				render_section(section, x, y)
-				section.unlock()
-				
+				if section:
+					section.lock()
+					render_section(section, x, y)
+					section.unlock()
+
 
 func render_section(section: Image, map_section_x: int, map_section_y: int) -> void:
 	for x in SECTION_SIZE:
