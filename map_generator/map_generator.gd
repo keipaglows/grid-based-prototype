@@ -25,19 +25,18 @@ func _ready():
 	RNG.randomize()
 	self.set_whole_section_set()
 	self.set_mini_map()
+
 	TRAVERSE_ALGORITHMS[TRAVERSE_ALGORITHM].call_func()
 	self.draw_mini_map(1)  # Draw and scale mini map
 
-
+# Traversing from top to bottom, from left to right
 func traverse_linear():
-	# Traversing from top to bottom, from left to right
 	for X in GAME_MAP_SECTIONS_WIDTH:
 		for Y in GAME_MAP_SECTIONS_HEIGHT:
 			self.place_section(X, Y)
 
-
+# Traversing from center in flower like fashion
 func traverse_flower():
-	# Traversing from center in flower like fashion
 	var CENTER_X = GAME_MAP_SECTIONS_WIDTH / 2
 	var CENTER_Y = GAME_MAP_SECTIONS_HEIGHT / 2
 	var MAX_SIDE = [GAME_MAP_SECTIONS_WIDTH, GAME_MAP_SECTIONS_HEIGHT].max()
