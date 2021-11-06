@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/money.png-1f9f6f89286cee18a313becf657da7fb.stex"
+path="res://.import/grid_lines_16_X.png-3967eb43cea1cea36985ba7a37c03438.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/sprites/objects/money.png"
-dest_files=[ "res://.import/money.png-1f9f6f89286cee18a313becf657da7fb.stex" ]
+source_file="res://grid/sprites/grid_lines_16_X.png"
+dest_files=[ "res://.import/grid_lines_16_X.png-3967eb43cea1cea36985ba7a37c03438.stex" ]
 
 [params]
 

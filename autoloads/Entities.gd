@@ -3,17 +3,16 @@ extends Node
 # entities
 
 ## obstacles
-var obstacles = load("res://entities/classes/obstacles.gd")
+var obstacles = load("res://entities/classes/obstacle.gd")
 var TreeObstacle = obstacles.TreeObstacle
 
 ## objects
-var objects = load("res://entities/classes/objects.gd")
+var objects = load("res://entities/classes/object.gd")
 var MoneyObject = objects.MoneyObject
 
 ## npc
-var npcs = load("res://entities/classes/npcs.gd")
+var npcs = load("res://entities/classes/npc.gd")
 var MouseNPC = npcs.MouseNPC
-
 
 # entity scenes
 var ObstacleScene = load("res://entities/scenes/Obstacle.tscn")
