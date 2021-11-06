@@ -17,8 +17,6 @@ func _ready():
 			for Y in range(GAME_MAP_SECTIONS_HEIGHT * SECTION_SIZE):
 				var grid_cell = GRID_LINE
 
-				# TODO: add an option to render section coordinate
-				# if RENDER_SECTION_COORDINATES: ...
 				if HIGHLIGHT_SECTION_LINES:
 					if (Y % SECTION_SIZE == 0):
 						grid_cell = GRID_LINE_SECTION_X

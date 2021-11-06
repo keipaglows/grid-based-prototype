@@ -52,7 +52,7 @@ func traverse_flower():
 			self.traverse_flower_segment(CENTER_X, CENTER_Y, distance, ImageSection.AT_BOTTOM_SIDE)
 			self.traverse_flower_segment(CENTER_X, CENTER_Y, distance, ImageSection.AT_LEFT_SIDE)
 
-
+# TODO: Refactor this to remove redundancy
 func traverse_flower_segment(x: int, y: int, distance: int, direction: String = ''):
 	var current_x = x
 	var current_y = y
