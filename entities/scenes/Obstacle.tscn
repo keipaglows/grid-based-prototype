@@ -2,9 +2,6 @@
 
 [ext_resource path="res://entities/sprites/obstacle/trees.png" type="Texture" id=1]
 
-
-
-
 [node name="Obstacle" type="Position2D"]
 position = Vector2( 8, 8 )
 

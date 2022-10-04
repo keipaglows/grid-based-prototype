@@ -2,8 +2,9 @@ extends Node2D
 
 enum TraverAlgorithms {LINEAR, FLOWER}
 
-export (Texture) var texture setget _set_texture
 export (TraverAlgorithms) var TRAVERSE_ALGORITHM
+export (String) var file_name
+export (Texture) var texture
 
 
 const GAME_MAP_SECTIONS_WIDTH = GameGlobals.GAME_MAP_SECTIONS_WIDTH
@@ -120,18 +121,19 @@ func traverse_flower_segment(x: int, y: int, distance: int, direction: String = 
 
 
 func set_whole_section_set():
-	var tile_sections = Image.new()
-	tile_sections.load("map_generator/sprites/sections_a.png")
-
+	var _tile_sections = Image.new()
 	var _whole_set = []
 	var section_index = 0
-	var MAX_TILE_SECTION_X = (tile_sections.get_width() / 3)
-	var MAX_TILE_SECTION_Y = (tile_sections.get_height() / 3)
+	
+	_tile_sections.load("map_generator/sprites/" + file_name)
 
-	for X in MAX_TILE_SECTION_X:
-		for Y in MAX_TILE_SECTION_Y:
-			var section = tile_sections.get_rect(
-				Rect2(X * SECTION_SIZE, Y * SECTION_SIZE, SECTION_SIZE, SECTION_SIZE)
+	var MAX_TILE_SECTION_X = _tile_sections.get_width() / GameGlobals.SECTION_SIZE
+	var MAX_TILE_SECTION_Y = _tile_sections.get_height() / GameGlobals.SECTION_SIZE
+
+	for x in MAX_TILE_SECTION_X:
+		for y in MAX_TILE_SECTION_Y:
+			var section = _tile_sections.get_rect(
+				Rect2(x * SECTION_SIZE, y * SECTION_SIZE, SECTION_SIZE, SECTION_SIZE)
 			)
 			
 			_whole_set.append(ImageSection.new(section, section_index))
@@ -143,10 +145,12 @@ func set_whole_section_set():
 
 func set_mini_map():
 	MINI_MAP = Image.new()
-	MINI_MAP.create(GAME_MAP_SECTIONS_WIDTH * SECTION_SIZE,
-					GAME_MAP_SECTIONS_HEIGHT * SECTION_SIZE,
-					false,
-					Image.FORMAT_RGBA8)
+	MINI_MAP.create(
+		GAME_MAP_SECTIONS_WIDTH * SECTION_SIZE,
+		GAME_MAP_SECTIONS_HEIGHT * SECTION_SIZE,
+		false,
+		Image.FORMAT_RGBA8
+	)
 
 
 func draw_mini_map(scale: int):
@@ -170,9 +174,11 @@ func place_section(x: int, y: int, ignore_sides: Dictionary = {}):
 	self.update_allowed_set_around(section, x ,y, ignore_sides)
 
 	# drawing current section to mini_map
-	MINI_MAP.blit_rect(section,
-					   Rect2(0, 0, SECTION_SIZE, SECTION_SIZE),
-					   Vector2(x * SECTION_SIZE, y * SECTION_SIZE))
+	MINI_MAP.blit_rect(
+		section,
+		Rect2(0, 0, SECTION_SIZE, SECTION_SIZE),
+		Vector2(x * SECTION_SIZE, y * SECTION_SIZE)
+	)
 
 
 func update_allowed_set(around_section: ImageSection,
@@ -187,6 +193,7 @@ func update_allowed_set(around_section: ImageSection,
 
 	var new_set_hash = self.get_set_index_hash(new_allowed_set)
 
+	# clean up new_allowed_set and use the previously stored one?
 	if not ALLOWED_SECTION_SET.get(new_set_hash):
 		ALLOWED_SECTION_SET[new_set_hash] = new_allowed_set
 
@@ -205,13 +212,13 @@ func update_allowed_set_around(section: ImageSection,
 		self.update_allowed_set(section, Vector2(x, y + 1), ImageSection.AT_BOTTOM_SIDE)
 	if not ignore_sides.get(ImageSection.AT_LEFT_SIDE):
 		self.update_allowed_set(section, Vector2(x - 1, y), ImageSection.AT_LEFT_SIDE)
-	
+
 
 func get_section_from_allowed_set(allowed_set: Array, X: int, Y: int):
 	if len(allowed_set):
 		return allowed_set[RNG.randi_range(0, len(allowed_set) - 1)]
 	else:
-		print('X: %s, Y: %s' % [X, Y])
+		print('NO ALLOWED SET - X: %s, Y: %s' % [X, Y])
 		# TODO: add mechanism to choose a more appropriate section
 		return WHOLE_SET[0]
 
@@ -226,13 +233,6 @@ func get_set_index_hash(section_set: Array):
 			set_index_hash += '_%s' % str(section.section_index)
 		
 	return set_index_hash
-
-
-func _set_texture(value):
-	# If the texture variable is modified externally,
-	# this callback is called.
-	texture = value  # Texture was changed.
-	update()  # Update the node's visual representation.
 
 
 func _draw():

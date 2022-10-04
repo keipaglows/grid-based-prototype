@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/actor.png-1cb4179a231087fea0cbe7092037fa54.stex"
+path="res://.import/dirt.png-2bac083383b8f46bcca5ff340cc2b4ab.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://grid/sprites/actor.png"
-dest_files=[ "res://.import/actor.png-1cb4179a231087fea0cbe7092037fa54.stex" ]
+source_file="res://entities/sprites/road/dirt.png"
+dest_files=[ "res://.import/dirt.png-2bac083383b8f46bcca5ff340cc2b4ab.stex" ]
 
 [params]
 

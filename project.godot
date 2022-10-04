@@ -22,12 +22,12 @@ _global_script_classes=[ {
 "base": "Image",
 "class": "ImageSection",
 "language": "GDScript",
-"path": "res://entities/classes/image_section.gd"
+"path": "res://classes/image_section.gd"
 }, {
 "base": "Node2D",
 "class": "ZLabel",
 "language": "GDScript",
-"path": "res://entities/classes/z_label.gd"
+"path": "res://classes/z_label.gd"
 } ]
 _global_script_class_icons={
 "BaseEntity": "",
