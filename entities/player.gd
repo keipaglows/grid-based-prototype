@@ -2,6 +2,7 @@ extends "base_pawn.gd"
 export(bool) var rotation_enabled = true
 
 onready var Grid = get_parent()
+onready var ZOOM_STEP = float(0.02)
 
 
 func _ready():
@@ -19,6 +20,13 @@ func _process(delta):
 			update_look_direction(input_direction)
 		else:
 			bump()
+	# TODO: handle this outside _process, and Player?
+	if Input.is_action_pressed("ui_page_up"):
+		update_camera_zoom(-ZOOM_STEP)
+	if Input.is_action_pressed("ui_page_down"):
+		update_camera_zoom(+ZOOM_STEP)
+	if Input.is_action_pressed("ui_home"):
+		restore_camera()
 
 
 func get_input_direction():
@@ -37,6 +45,18 @@ func update_look_direction(direction):
 
 func update_camera_position(direction):
 	$Pivot/CameraWrapper.rotation = direction.angle()
+
+
+func update_camera_zoom(delta: float):
+	var current_zoom = $Pivot/CameraWrapper/Offset/Camera.zoom
+	var zoom_value = current_zoom.x + delta  # TODO: also handle y?
+	
+	if zoom_value > GameGlobals.MIN_CAMERA_ZOOM and zoom_value < GameGlobals.MAX_CAMERA_ZOOM:
+		$Pivot/CameraWrapper/Offset/Camera.zoom = Vector2(zoom_value, zoom_value)
+
+
+func restore_camera():
+	$Pivot/CameraWrapper/Offset/Camera.zoom = Vector2(1, 1)
 
 
 func move_to(target_position):

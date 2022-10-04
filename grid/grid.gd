@@ -10,7 +10,8 @@ const GAME_MAP_SECTIONS_WIDTH = GameGlobals.GAME_MAP_SECTIONS_WIDTH
 const GAME_MAP_SECTIONS_HEIGHT = GameGlobals.GAME_MAP_SECTIONS_HEIGHT
 const SECTION_SIZE = GameGlobals.SECTION_SIZE
 
-const TREE_COLOR = Color(0.6, 0.898039, 0.313726, 1)
+const TREE_COLOR = Color("#99e550")
+const ROAD_COLOR = Color("#9d611d")
 
 
 func _ready():
@@ -30,13 +31,18 @@ func _ready():
 
 func render_section(section: Image, map_section_x: int, map_section_y: int) -> void:
 	for x in SECTION_SIZE:
-		for y in SECTION_SIZE:
-			if section.get_pixel(x, y).is_equal_approx(TREE_COLOR):
-				var section_x = x + (map_section_x * SECTION_SIZE)
-				var section_y = y + (map_section_y * SECTION_SIZE)
-				var tree_obtascle = Entities.TreeObstacle.new(Vector2(section_x, section_y))
+		var section_x = x + (map_section_x * SECTION_SIZE)
 
-				tree_obtascle.add_to_tile_map(self)
+		for y in SECTION_SIZE:
+			var section_y = y + (map_section_y * SECTION_SIZE)
+
+			match section.get_pixel(x, y):
+				TREE_COLOR:
+					var tree_obtascle = Entities.TreeObstacle.new(Vector2(section_x, section_y))
+					tree_obtascle.add_to_tile_map(self)
+				ROAD_COLOR:
+					var dirt_road = Entities.DirtRoad.new(Vector2(section_x, section_y))
+					dirt_road.add_to_tile_map(self)
 
 
 func request_move(pawn, direction):
@@ -48,7 +54,10 @@ func request_move(pawn, direction):
 	if not entity:
 		return update_pawn_position(pawn, cell_start, cell_target)
 
+	# TODO: check for has_collision
 	match entity.type:
+		EntityType.ROAD:
+			return update_pawn_position(pawn, cell_start, cell_target)
 		EntityType.OBJECT:
 			entity.destroy(self)
 			return update_pawn_position(pawn, cell_start, cell_target)
