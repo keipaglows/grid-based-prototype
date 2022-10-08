@@ -10,8 +10,18 @@ const GAME_MAP_SECTIONS_WIDTH = GameGlobals.GAME_MAP_SECTIONS_WIDTH
 const GAME_MAP_SECTIONS_HEIGHT = GameGlobals.GAME_MAP_SECTIONS_HEIGHT
 const SECTION_SIZE = GameGlobals.SECTION_SIZE
 
+# Obstacle colors
 const TREE_COLOR = Color("#99e550")
+const MOUNTAIN_COLOR = Color("#c28144")
+# Object colors
+const ALTAR_COLOR = Color("#44b0c2")
+# Road colors
 const ROAD_COLOR = Color("#9d611d")
+
+onready var RENDER_MAP = {
+	TREE_COLOR: Entities.TreeObstacle,
+	ROAD_COLOR: Entities.DirtRoad
+}
 
 
 func _ready():
@@ -35,14 +45,10 @@ func render_section(section: Image, map_section_x: int, map_section_y: int) -> v
 
 		for y in SECTION_SIZE:
 			var section_y = y + (map_section_y * SECTION_SIZE)
+			var render_entity = RENDER_MAP.get(section.get_pixel(x, y))
 
-			match section.get_pixel(x, y):
-				TREE_COLOR:
-					var tree_obtascle = Entities.TreeObstacle.new(Vector2(section_x, section_y))
-					tree_obtascle.add_to_tile_map(self)
-				ROAD_COLOR:
-					var dirt_road = Entities.DirtRoad.new(Vector2(section_x, section_y))
-					dirt_road.add_to_tile_map(self)
+			if render_entity:
+				render_entity.new(Vector2(section_x, section_y)).add_to_tile_map(self)
 
 
 func request_move(pawn, direction):
